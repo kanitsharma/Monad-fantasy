@@ -1,10 +1,19 @@
-const Maybe = require('./maybe-class')
+const Maybe = require('./maybe')
+const { Right, Left } = require('./either')
 
-const res = Maybe(10)
+const eitherCall = x => x ? Right(x) : Left(x)
+
+const res1 = Maybe(10)
   .map(x => x*10)
   .chain(x => Maybe(x*100))
-  .map(async x => x*10)
+  .map(x => x*10)
   .fold()
-  .then(console.log)
 
-console.log(res)
+const res2 = eitherCall(20)
+  .map(x => x * 10)
+  .fold(
+    _ => 'error',
+    x => x
+  )
+
+console.log(res1, res2)
