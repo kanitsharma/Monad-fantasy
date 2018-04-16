@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "monet": "^0.8.10",
     "rambda": "^1.1.0"
   }
 }

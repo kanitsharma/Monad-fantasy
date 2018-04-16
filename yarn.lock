@@ -2,6 +2,10 @@
 # yarn lockfile v1
 
 
+monet@^0.8.10:
+  version "0.8.10"
+  resolved "https://registry.yarnpkg.com/monet/-/monet-0.8.10.tgz#af82af50591466f78baf97c053e2ffe5e9108224"
+
 rambda@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/rambda/-/rambda-1.1.0.tgz#f184f22acead64287c74c9de94853fb4cc32b852"
