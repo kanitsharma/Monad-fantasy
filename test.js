@@ -1,5 +1,6 @@
 const Maybe = require('./maybe')
 const { Right, Left } = require('./either')
+const IO = require('./IOmonad')
 
 const eitherCall = x => x ? Right(x) : Left(x)
 
@@ -15,5 +16,19 @@ const res2 = eitherCall(20)
     _ => 'error',
     x => x
   )
+
+const sideEffectIO = x => IO(_ => {
+  console.log('Hello I am side effect' + x)
+  return x
+})
+
+const increment = x => x + 1
+
+const res3 = sideEffectIO(1)
+  .map(increment)
+  .chain(sideEffectIO)
+  .map(increment)
+  .chain(sideEffectIO)
+  .run()
 
 console.log(res1, res2)
