@@ -4,7 +4,7 @@
 const IO = g => {
   const map = f => IO(_ => f(g()))
   const chain = f => IO(_ => f(g())).run()
-  const run = _ => g() 
+  const run = _ => g()
 
   return { map, chain, run }
 }

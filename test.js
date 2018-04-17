@@ -1,6 +1,7 @@
 const Maybe = require('./maybe')
 const { Right, Left } = require('./either')
 const IO = require('./IOmonad')
+const Task = require('data.task')
 
 const eitherCall = x => x ? Right(x) : Left(x)
 
@@ -22,6 +23,10 @@ const sideEffectIO = x => IO(_ => {
   return x
 })
 
+const httpGet = x => new Task((res, rej) => {
+  setTimeout(_ => res('Side effect done'), 3000)
+})
+
 const increment = x => x + 1
 
 const res3 = sideEffectIO(1)
@@ -31,4 +36,11 @@ const res3 = sideEffectIO(1)
   .chain(sideEffectIO)
   .run()
 
-console.log(res1, res2)
+const res4 = httpGet()
+  .map(x => x + 1)
+  .fork(
+    err => console.log(err),
+    data => console.log(data)
+  )
+
+console.log(res1, res2, res3, res4)
