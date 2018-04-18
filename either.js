@@ -7,7 +7,7 @@ const Right = x => ({
 const Left = x => ({
   map: fn => Left(x),
   fold: (f, g) => f(x),
-  inspect: _ => `Right(${x})`,
+  inspect: _ => `Right(${x})`
 })
 
 module.exports = { Right, Left }

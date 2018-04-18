@@ -9,4 +9,4 @@ const Maybe = x => {
   return { of, isNothing, map, chain, fold, inspect }
 }
 
-module.exports = Maybe 
+module.exports = Maybe

@@ -6,9 +6,9 @@ const Task = require('data.task')
 const eitherCall = x => x ? Right(x) : Left(x)
 
 const res1 = Maybe(10)
-  .map(x => x*10)
-  .chain(x => Maybe(x*100))
-  .map(x => x*10)
+  .map(x => x * 10)
+  .chain(x => Maybe(x * 100))
+  .map(x => x * 10)
   .fold()
 
 const res2 = eitherCall(20)

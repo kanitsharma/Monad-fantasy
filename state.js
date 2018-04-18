@@ -4,7 +4,6 @@ const State = runState => {
     return { value: f(prevState.value), state: prevState.state }
   })
 
-  
   const fold = () => State(state => {
     const prevState = runState(state)
     return prevState.value.runState(prevState.state)
@@ -18,3 +17,5 @@ const State = runState => {
 
   return { map, fold, chain, evalState, execState }
 }
+
+module.export = State
