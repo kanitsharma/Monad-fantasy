@@ -1,40 +1,20 @@
-function tate(s) {
-  this.runState = s;
+const State = runState => {
+  const map = f => State(state => {
+    const prevState = runState(state)
+    return { value: f(prevState.value), state: prevState.state }
+  })
+
+  
+  const fold = () => State(state => {
+    const prevState = runState(state)
+    return prevState.value.runState(prevState.state)
+  })
+
+  const chain = f => map(f).fold()
+
+  const evalState = initState => runState(initState).value
+
+  const execState = initState => runState(initState).state
+
+  return { map, fold, chain, evalState, execState }
 }
-
-State.prototype = {
-  map: function(f) {
-    var runState = this.runState;
-    return new State(function(state) {
-      var prev = runState(state);
-      return { value: f(prev.value), state: prev.state };
-    });
-  },
-
-  join: function() {
-    var runState = this.runState;
-    return new State(function(state) {
-      var prev = runState(state);
-      var inner = prev.value.runState(prev.state);
-      return inner;
-    });
-  },
-
-  bind: function(f) {
-    return this.map(f).join();
-  },
-
-  evalState: function(initState) {
-    var result = this.runState(initState);
-    return result.value;
-  },
-
-  execState: function(initState) {
-    var result = this.runState(initState);
-    return result.state;
-  }
-};
-
-const State = s => {
-  const map = f => Stte()) 
-}<Up>
