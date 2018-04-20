@@ -2,6 +2,7 @@ const Maybe = require('./maybe')
 const { Right, Left } = require('./either')
 const IO = require('./IOmonad')
 const Task = require('data.task')
+const State = require('./state')
 
 const eitherCall = x => x ? Right(x) : Left(x)
 
@@ -43,4 +44,9 @@ const res4 = httpGet()
     data => console.log(data)
   )
 
-console.log(res1, res2, res3, res4)
+const res5 = State(s => ({ value: s, state: s }))
+  .map(x => x + 10)
+  .execState(30)
+
+console.log(res1, res2)
+console.log('State' + res5)
