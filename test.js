@@ -24,9 +24,10 @@ const sideEffectIO = x => IO(_ => {
   return x
 })
 
-const httpGet = x => new Task((res, rej) => {
-  setTimeout(_ => res('Side effect done'), 3000)
-})
+const httpGet = x =>
+  new Task((rej, res) => {
+    res('hello')
+  })
 
 const increment = x => x + 1
 
@@ -35,18 +36,28 @@ const res3 = sideEffectIO(1)
   .chain(sideEffectIO)
   .map(increment)
   .chain(sideEffectIO)
-  .run()
+
+const res5 = State(s => ([s, s ]))
+  .map(x => x + 10)
+  .chain(x => State(s => [ x, x + s ]))
+  .runState(30)
+
+//  console.log(res1, res2)
+// console.log(res4)
 
 const res4 = httpGet()
-  .map(x => x + 1)
+  .map(x => State(s => ([ x, s ])))
+  .map(state => (
+    state
+      .map(x => x + '!')
+  ))
+  .chain(state => new Task((rej, res) => {
+    res(
+      state.map(x => x + '!!')
+    )
+  }))
   .fork(
     err => console.log(err),
-    data => console.log(data)
-  )
+    state => console.log(state.runState(null))
+  )  
 
-const res5 = State(s => ({ value: s, state: s }))
-  .map(x => x + 10)
-  .execState(30)
-
-console.log(res1, res2)
-console.log('State' + res5)
