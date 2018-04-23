@@ -59,5 +59,11 @@ const res4 = httpGet()
   .fork(
     err => console.log(err),
     state => console.log(state.runState(null))
-  )  
+  )
 
+Task.of(4)
+  .chain(x => x + 5)
+  .chain(y =>
+    sideEffectIO(y)
+      .map(friend => friend/* both available via closure */)
+  )
