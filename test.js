@@ -45,15 +45,15 @@ const res5 = State(s => ([s, s ]))
 //  console.log(res1, res2)
 // console.log(res4)
 
+// httpGet :: () -> Task
 const res4 = httpGet()
   .map(x => State(s => ([ x, s ])))
-  .map(state => (
-    state
-      .map(x => x + '!')
-  ))
+  .map(x => x + '!')(State)
   .chain(state => new Task((rej, res) => {
     res(
-      state.map(x => x + '!!')
+      state
+        .map(x => x + '!!')
+        .chain(x => State(s => ([ x, x ])))
     )
   }))
   .fork(
