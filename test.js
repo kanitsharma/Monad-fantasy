@@ -3,6 +3,7 @@ const { Right, Left } = require('./either')
 const IO = require('./IOmonad')
 const Task = require('data.task')
 const State = require('./state')
+const yieldTask = require('yieldtask')
 
 const eitherCall = x => x ? Right(x) : Left(x)
 
@@ -46,24 +47,28 @@ const res5 = State(s => ([s, s ]))
 // console.log(res4)
 
 // httpGet :: () -> Task
-const res4 = httpGet()
-  .map(x => State(s => ([ x, s ])))
-  .map(x => x + '!')(State)
-  .chain(state => new Task((rej, res) => {
-    res(
-      state
-        .map(x => x + '!!')
-        .chain(x => State(s => ([ x, x ])))
-    )
-  }))
-  .fork(
-    err => console.log(err),
-    state => console.log(state.runState(null))
-  )
+// const res4 = httpGet()
+//   .map(x => State(s => ([ x, s ])))
+//   .map(x => x + '!')(State)
+//   .chain(state => new Task((rej, res) => {
+//     res(
+//       state
+//         .map(x => x + '!!')
+//         .chain(x => State(s => ([ x, x ])))
+//     )
+//   }))
+//   .fork(
+//     err => console.log(err),
+//     state => console.log(state.runState(null))
+//   )
 
-Task.of(4)
-  .chain(x => x + 5)
-  .chain(y =>
-    sideEffectIO(y)
-      .map(friend => friend/* both available via closure */)
-  )
+const testTask = a => Task.of(a)
+  .map(x => x + 5)
+
+function * test () {
+  const a = yield yieldTask(testTask, 10)
+  yield a
+}
+
+test().next()
+console.log(test().next())

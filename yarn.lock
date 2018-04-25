@@ -834,6 +834,10 @@ readable-stream@^2.2.2:
     string_decoder "~1.1.1"
     util-deprecate "~1.0.1"
 
+redux-saga@^0.16.0:
+  version "0.16.0"
+  resolved "https://registry.yarnpkg.com/redux-saga/-/redux-saga-0.16.0.tgz#0a231db0a1489301dd980f6f2f88d8ced418f724"
+
 regexpp@^1.0.1:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/regexpp/-/regexpp-1.1.0.tgz#0e3516dd0b7904f413d2d4193dce4618c3a689ab"
@@ -1054,3 +1058,10 @@ write@^0.2.1:
 yallist@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/yallist/-/yallist-2.1.2.tgz#1c11f9218f076089a47dd512f93c6699a6a81d52"
+
+yieldtask@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/yieldtask/-/yieldtask-0.1.1.tgz#a031d745ff16553e50ba9c24d98e4d84f1a29bc5"
+  dependencies:
+    data.task "^3.1.1"
+    redux-saga "^0.16.0"
