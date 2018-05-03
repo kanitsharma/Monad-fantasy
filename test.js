@@ -43,24 +43,24 @@ const res5 = State(s => ([s, s ]))
   .chain(x => State(s => [ x, x + s ]))
   .runState(30)
 
-//  console.log(res1, res2)
-// console.log(res4)
+ console.log(res1, res2)
+console.log(res4)
 
-// httpGet :: () -> Task
-// const res4 = httpGet()
-//   .map(x => State(s => ([ x, s ])))
-//   .map(x => x + '!')(State)
-//   .chain(state => new Task((rej, res) => {
-//     res(
-//       state
-//         .map(x => x + '!!')
-//         .chain(x => State(s => ([ x, x ])))
-//     )
-//   }))
-//   .fork(
-//     err => console.log(err),
-//     state => console.log(state.runState(null))
-//   )
+httpGet :: () -> Task
+const res4 = httpGet()
+  .map(x => State(s => ([ x, s ])))
+  .map(x => x + '!')(State)
+  .chain(state => new Task((rej, res) => {
+    res(
+      state
+        .map(x => x + '!!')
+        .chain(x => State(s => ([ x, x ])))
+    )
+  }))
+  .fork(
+    err => console.log(err),
+    state => console.log(state.runState(null))
+  )
 
 const testTask = a => Task.of(a)
   .map(x => x + 5)
