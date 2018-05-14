@@ -1,3 +1,3 @@
-# Monad Fantasy ![alt text](https://banner.kisspng.com/20180329/jjq/kisspng-half-life-2-black-mesa-t-shirt-lambda-life-5abd7c9e5f6676.0073703915223676463908.jpg "Monad Fantasy")
+# Monad Fantasy <img src="https://png.icons8.com/color/1600/lambda.png" alt="drawing" style="width: 200px;"/>
 
 A collection of monads implemented in javascript, following fantasy-land specs
